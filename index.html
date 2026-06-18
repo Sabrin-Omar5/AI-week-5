@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guess the Number Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Guess the Number</h1>
+
+    <div class="status">
+      <p id="turn">Turn: Player</p>
+      <p id="score">Player: 0 | Computer: 0</p>
+    </div>
+
+    <div class="game-area">
+      <p>Choose a number between 1 and 5:</p>
+
+      <div id="buttons" class="buttons">
+        <button onclick="playRound(1)">1</button>
+        <button onclick="playRound(2)">2</button>
+        <button onclick="playRound(3)">3</button>
+        <button onclick="playRound(4)">4</button>
+        <button onclick="playRound(5)">5</button>
+      </div>
+
+      <div id="result" class="result">
+        Make your guess!
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
