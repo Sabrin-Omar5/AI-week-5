@@ -2,21 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guess the Number Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neon Guess Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div class="container">
-    <h1>🎯 Guess the Number</h1>
+    <h1>⚡ Neon Guess Battle</h1>
 
     <div class="status">
-      <p id="turn">Turn: Player</p>
-      <p id="score">Player: 0 | Computer: 0</p>
+      <p id="statusText">Press Start to Play</p>
+      <p id="scoreText">Player: 0 | Computer: 0</p>
     </div>
 
+    <button id="startBtn" onclick="startGame()">Start Game</button>
+    <button id="restartBtn" onclick="restartGame()" style="display:none;">Restart</button>
+
     <div class="game-area">
-      <p>Choose a number between 1 and 5:</p>
+      <p class="hint">Pick a number (1–5)</p>
 
       <div id="buttons" class="buttons">
         <button onclick="playRound(1)">1</button>
@@ -26,9 +30,7 @@
         <button onclick="playRound(5)">5</button>
       </div>
 
-      <div id="result" class="result">
-        Make your guess!
-      </div>
+      <div id="result" class="result">Game not started</div>
     </div>
   </div>
 

@@ -1,46 +1,74 @@
-// Store available choices in an array
 const choices = [1, 2, 3, 4, 5];
 
-// Object to track scores
-const score = {
+let score = {
   player: 0,
   computer: 0
 };
 
-const turnDisplay = document.getElementById("turn");
-const scoreDisplay = document.getElementById("score");
-const resultDisplay = document.getElementById("result");
+let gameActive = false;
+const winningScore = 10;
 
-let currentTurn = "Player";
+const statusText = document.getElementById("statusText");
+const scoreText = document.getElementById("scoreText");
+const result = document.getElementById("result");
+
+const startBtn = document.getElementById("startBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+function startGame() {
+  gameActive = true;
+  score.player = 0;
+  score.computer = 0;
+
+  statusText.textContent = "Game Started! First to 10 wins";
+  result.textContent = "Make your guess!";
+  updateScore();
+
+  startBtn.style.display = "none";
+  restartBtn.style.display = "inline-block";
+}
+
+function restartGame() {
+  startGame();
+}
 
 function playRound(playerGuess) {
-  // Show player's turn
-  currentTurn = "Player";
-  turnDisplay.textContent = `Turn: ${currentTurn}`;
-
-  // Computer chooses a random number from the array
-  currentTurn = "Computer";
-  turnDisplay.textContent = `Turn: ${currentTurn}`;
-
-  const computerNumber =
-    choices[Math.floor(Math.random() * choices.length)];
-
-  // Decide winner using if/else conditionals
-  if (playerGuess === computerNumber) {
-    score.player++;
-    resultDisplay.textContent =
-      `🎉 Correct! Computer chose ${computerNumber}. You win this round!`;
-  } else {
-    score.computer++;
-    resultDisplay.textContent =
-      `❌ Wrong! Computer chose ${computerNumber}. Computer wins this round!`;
+  if (!gameActive) {
+    result.textContent = "Press Start to begin!";
+    return;
   }
 
-  // Update score display
-  scoreDisplay.textContent =
-    `Player: ${score.player} | Computer: ${score.computer}`;
+  const computerGuess = choices[Math.floor(Math.random() * choices.length)];
 
-  // Set turn back to player
-  currentTurn = "Player";
-  turnDisplay.textContent = `Turn: ${currentTurn}`;
+  if (playerGuess === computerGuess) {
+    score.player++;
+    result.textContent = `🎯 You matched ${computerGuess}! You score!`;
+  } else {
+    score.computer++;
+    result.textContent = `💥 Computer picked ${computerGuess}. It scores!`;
+  }
+
+  updateScore();
+  checkWinner();
+}
+
+function updateScore() {
+  scoreText.textContent = `Player: ${score.player} | Computer: ${score.computer}`;
+}
+
+function checkWinner() {
+  if (score.player >= winningScore) {
+    endGame("🎉 You Win the Neon Battle!");
+  } else if (score.computer >= winningScore) {
+    endGame("💀 Computer Wins! Try Again");
+  }
+}
+
+function endGame(message) {
+  gameActive = false;
+  statusText.textContent = message;
+  result.textContent = "Game Over";
+
+  startBtn.style.display = "none";
+  restartBtn.style.display = "inline-block";
 }
